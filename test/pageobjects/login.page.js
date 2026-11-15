@@ -1,43 +1,76 @@
 import { $ } from '@wdio/globals'
 import Page from './page.js';
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
-class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-
-
-    get inputUsername () {
-        return $('#user-name');
-    }
-user1="standard_user"
-    get inputPassword () {
-        return $('#password');
-    }
-password1="secret_sauce"
-    get btnSubmit () {
-        return $('#login-button');
+class ApparelPage extends Page {
+    get sortButton () {
+        return $('#sort-btn');
     }
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
-    async login (username, password) {
-        await this.inputUsername.setValue(username);
-        await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
+    get openButton () {
+        return $('#sort-btn open');
+    }
+
+    get pricehighButton () {
+        return $('[data-sort="price-asc"]');
+    }
+
+    get pricelowButton () {
+        return $('[data-sort="price-desc"]');
+    }
+
+    get span () {
+        return $('//span[text()="Price: Low to High"]');
+    }
+    get nameDescButton () {
+        return $('[data-sort="name-desc"]');
+    }
+
+    get nameAscButton () {
+        return $('[data-sort="name-asc"]');
+    }
+
+    get onSaleButton () {
+        return $('[data-sort="on-sale"]');
+    }
+
+    get newArrivalsButton () {
+        return $('[data-sort="new"]');
+    }
+
+    async sort () {
+        await this.sortButton.click();
+        await this.openButton;
+        await this.pricehighButton.click();
+        await browser.url('https://rippsam.github.io/sportsEquip/index.html?dept=5');
+        await this.sortButton.click();
+        await this.openButton;
+        await this.pricelowButton.click();
+        await browser.url('https://rippsam.github.io/sportsEquip/index.html?dept=5');
+        await this.sortButton.click();
+        await this.openButton;
+        await this.nameDescButton.click();
+        await browser.url('https://rippsam.github.io/sportsEquip/index.html?dept=5');
+        await this.sortButton.click();
+        await this.openButton;
+        await this.nameAscButton.click();
+        await browser.url('https://rippsam.github.io/sportsEquip/index.html?dept=5');
+        await this.sortButton.click();
+        await this.openButton;
+        await this.onSaleButton.click();
+        await browser.url('https://rippsam.github.io/sportsEquip/index.html?dept=5');
+        await this.sortButton.click();
+        await this.openButton;
+        await this.newArrivalsButton.click();
+        await browser.url('https://rippsam.github.io/sportsEquip/index.html?dept=5');
+
     }
 
     /**
      * overwrite specific options to adapt it to page object
      */
     open () {
-        return super.open('login');
+        return super.open('apparel');
     }
 }
 
-export default new LoginPage();
+export default new ApparelPage();
